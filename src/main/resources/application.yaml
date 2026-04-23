@@ -1,0 +1,14 @@
+server:
+  port: 8084
+spring:
+  application:
+    name: ShareYourTripReviewsMs
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+  datasource:
+    platform: postgres
+    url: jdbc:postgresql://localhost:54320/shareYourTrip
+    username: product
+    password: product
+    driverClassName: org.postgresql.Driver
