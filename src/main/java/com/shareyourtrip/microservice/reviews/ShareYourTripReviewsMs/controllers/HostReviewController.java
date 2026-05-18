@@ -44,6 +44,15 @@ public class HostReviewController {
         return hostReviewService.getByReviewerHostId(hostId);
     }
 
+    @GetMapping("/exists")
+    public java.util.Map<Long, Boolean> getExistsByBookingRequestIds(@RequestParam("bookingRequestIds") String bookingRequestIdsStr) {
+        List<Long> bookingRequestIds = java.util.Arrays.stream(bookingRequestIdsStr.split(","))
+                .map(String::trim)
+                .map(Long::parseLong)
+                .toList();
+        return hostReviewService.getExistsByBookingRequestIds(bookingRequestIds);
+    }
+
     @PatchMapping("/{id}")
     public HostReviewResponseDto update(@PathVariable Long id,
                                      @Valid @RequestBody ReviewUpdateDto request) {

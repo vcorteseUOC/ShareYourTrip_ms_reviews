@@ -12,7 +12,11 @@ public interface TravelerReviewRepository extends JpaRepository<TravelerReview, 
 
     boolean existsByBookingRequestId(Long bookingRequestId);
 
+    List<TravelerReview> findByBookingRequestIdIn(List<Long> bookingRequestIds);
+
     List<TravelerReview> findByReviewedHostId(Long reviewedHostId);
 
     List<TravelerReview> findByReviewerTravelerId(Long reviewerTravelerId);
+
+    List<TravelerReview> findByReviewerTravelerIdIn(List<Long> reviewerTravelerIds);
 }

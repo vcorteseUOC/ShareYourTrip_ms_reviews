@@ -20,4 +20,6 @@ public interface HostReviewService {
     HostReviewResponseDto update(Long id, ReviewUpdateDto request);
 
     void delete(Long id);
+
+    java.util.Map<Long, Boolean> getExistsByBookingRequestIds(java.util.List<Long> bookingRequestIds);
 }

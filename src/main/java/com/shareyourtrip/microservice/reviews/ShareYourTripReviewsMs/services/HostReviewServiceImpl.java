@@ -102,4 +102,26 @@ public class HostReviewServiceImpl implements HostReviewService {
 
         hostReviewRepository.delete(review);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public java.util.Map<Long, Boolean> getExistsByBookingRequestIds(java.util.List<Long> bookingRequestIds) {
+        if (bookingRequestIds == null || bookingRequestIds.isEmpty()) {
+            return new java.util.HashMap<>();
+        }
+
+        List<HostReview> reviews = hostReviewRepository.findAll()
+                .stream()
+                .filter(review -> bookingRequestIds.contains(review.getBookingRequestId()))
+                .toList();
+
+        java.util.Map<Long, Boolean> result = new java.util.HashMap<>();
+        for (Long bookingId : bookingRequestIds) {
+            boolean exists = reviews.stream()
+                    .anyMatch(review -> review.getBookingRequestId().equals(bookingId));
+            result.put(bookingId, exists);
+        }
+
+        return result;
+    }
 }
